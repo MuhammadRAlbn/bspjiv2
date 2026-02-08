@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Alur;
 use App\Models\Komoditi;
 use App\Models\Laboratorium;
+use App\Models\RuangLingkup;
 use App\Models\Sertifikasi;
 
 class PengujianController extends Controller
@@ -16,12 +17,14 @@ class PengujianController extends Controller
         $alur = Alur::active()->first();
         $laboratorium = Laboratorium::active()->get();
         $komoditi = Komoditi::active()->get();
+        $ruangLingkup = RuangLingkup::active()->with('laboratorium')->get();
 
         return view('layanan.pengujian', compact(
             'sertifikasi',
             'alur',
             'laboratorium',
-            'komoditi'
+            'komoditi',
+            'ruangLingkup'
         ));
     }
 }
